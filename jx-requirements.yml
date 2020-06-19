@@ -1,38 +1,82 @@
 autoUpdate:
   enabled: false
   schedule: ""
+bootConfigURL: https://github.com/cloudbees/cloudbees-jenkins-x-boot-config.git
 cluster:
-  clusterName: ""
-  environmentGitOwner: ""
-  environmentGitPublic: true
-  project: ""
   azure: {}
+  clusterName: rom-cjxd11-2
+  devEnvApprovers:
+  - romainverduci
+  environmentGitOwner: core-platform-test-org
+  environmentGitPublic: true
+  gitKind: github
+  gitName: github
+  gitServer: https://github.com
+  namespace: jx
+  project: apps-dev-229310
   provider: gke
-  zone: ""
-gitops: true
+  registry: gcr.io
+  zone: europe-west1-b
 environments:
-  - key: dev
-  - key: staging
-  - key: production
+- ingress:
+    domain: 35.241.137.79.nip.io
+    externalDNS: false
+    namespaceSubDomain: -jx.
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: dev
+  repository: environment-rom-cjxd11-2-dev
+- ingress:
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: staging
+  repository: environment-rom-cjxd11-2-staging
+- ingress:
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: production
+  repository: environment-rom-cjxd11-2-production
+gitops: true
 ingress:
-  domain: ""
+  domain: 35.241.137.79.nip.io
   externalDNS: false
+  namespaceSubDomain: -jx.
   tls:
     email: ""
     enabled: false
     production: false
 kaniko: true
+repository: nexus
 secretStorage: vault
 storage:
+  backup:
+    enabled: false
+    url: ""
   logs:
     enabled: true
-    url: ""
+    url: gs://rom-cjxd11-2-logs-971381b0-9794-4bb6-8898-c6ff7d8c098e
   reports:
     enabled: true
-    url: ""
+    url: gs://rom-cjxd11-2-reports-ae216737-d973-4087-b3a6-42525955f6
   repository:
     enabled: true
-    url: ""
+    url: gs://rom-cjxd11-2-repository-9f9b080b-f43e-4bac-b24e-08a0f32
+vault: {}
+velero:
+  schedule: ""
+  ttl: ""
 versionStream:
   ref: 2.1.75+cjxd.11
   url: https://github.com/cloudbees/cloudbees-jenkins-x-versions.git
